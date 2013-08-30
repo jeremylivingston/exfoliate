@@ -36,7 +36,9 @@ Use the `Exfoliate\SoapClient::setHeaders()` method to set any SOAP headers when
 use Exfoliate\SoapClient;
 
 $client = new SoapClient('my-service-url', array('trace' => true));
-$client->setHeaders(new \SoapHeader('my-namespace', 'Authentication', array('Username' => 'me', 'Password' => 'Password1')));
+
+$header = new \SoapHeader('my-namespace', 'Auth', array('User' => 'me', 'Password' => 'pw'));
+$client->setHeaders($header);
 
 $response = $client->call('GetUser', array('user_id' => 1234));
 
