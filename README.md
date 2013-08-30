@@ -37,8 +37,9 @@ use Exfoliate\SoapClient;
 
 $client = new SoapClient('my-service-url', array('trace' => true));
 
-$header = new \SoapHeader('my-namespace', 'Auth', array('User' => 'me', 'Password' => 'pw'));
-$client->setHeaders($header);
+$client->setHeaders(
+    new \SoapHeader('my-namespace', 'Auth', array('User' => 'me', 'Password' => 'pw'))
+);
 
 $response = $client->call('GetUser', array('user_id' => 1234));
 
