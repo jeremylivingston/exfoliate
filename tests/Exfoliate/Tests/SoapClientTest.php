@@ -62,16 +62,19 @@ class SoapClientTest extends \PHPUnit_Framework_TestCase
     {
         $method = 'method';
         $data = array('data_element' => 'element_value');
+        $options = array('soapaction' => 'some_action', 'uri' => 'some_uri');
+        $inputHeaders = new \SoapHeader('http://soapinterop.org/echoheader/', 'echoMeStringRequest');
+        $outputHeaders = array('data_element' => 'element_value');
 
         $this->factoryClient->expects($this->once())
             ->method('__soapCall')
-            ->with($method, $data);
+            ->with($method, $data, $options, $inputHeaders, $outputHeaders);
 
         $this->factory->expects($this->once())
             ->method('create')
             ->will($this->returnValue($this->factoryClient));
 
-        $this->client->call($method, $data);
+        $this->client->call($method, $data, $options, $inputHeaders, $outputHeaders);
     }
 
     public function testConnectionSoapFaultsThrowConnectionException()
