@@ -59,6 +59,6 @@ $client = new SoapClient('my-service-url', array('trace' => true));
 $response = $client->call('GetUser', array('user_id' => 1234));
 
 $lastRequest = $client->getLastRequest();
-$lastResponse = $clinet->getLastResponse();
+$lastResponse = $client->getLastResponse();
 
 ```
