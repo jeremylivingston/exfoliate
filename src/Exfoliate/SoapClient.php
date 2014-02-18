@@ -52,18 +52,21 @@ class SoapClient implements ClientInterface
     /**
      * @param string $method
      * @param mixed $data
+     * @param array $options
+     * @param null $inputHeaders
+     * @param null $outputHeaders
      *
      * @throws Exception\ClientException
      * @return mixed
      */
-    public function call($method, $data)
+    public function call($method, $data, $options = array(), $inputHeaders = null, &$outputHeaders = null)
     {
         if (!$this->client) {
             $this->initializeClient();
         }
 
         try {
-            return $this->client->__soapCall($method, $data);
+            return $this->client->__soapCall($method, $data, $options, $inputHeaders, $outputHeaders);
         } catch (\SoapFault $soapFault) {
             throw new ClientException(sprintf('Call to %s failed', $method), 0, $soapFault);
         }
