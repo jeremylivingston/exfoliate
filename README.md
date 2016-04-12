@@ -1,6 +1,6 @@
 # Exfoliate
 
-[![Build Status](https://travis-ci.org/jeremylivingston/exfoliate.png?branch=master)](https://travis-ci.org/Ocramius/ProxyManager)
+[![Build Status](https://travis-ci.org/jeremylivingston/exfoliate.png?branch=master)](https://travis-ci.org/jeremylivingston/exfoliate)
 
 Exfoliate is a lightweight PHP wrapper for the core SoapClient class.
 
