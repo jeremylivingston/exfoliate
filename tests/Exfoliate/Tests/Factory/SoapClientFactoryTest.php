@@ -3,8 +3,9 @@
 namespace Exfoliate\Tests\Factory;
 
 use Exfoliate\Factory\SoapClientFactory;
+use PHPUnit\Framework\TestCase;
 
-class SoapClientFactoryTest extends \PHPUnit_Framework_TestCase
+class SoapClientFactoryTest extends TestCase
 {
     public function testInterfaceImplementationIsValid()
     {

@@ -3,8 +3,9 @@
 namespace Exfoliate\Tests;
 
 use Exfoliate\SoapClient;
+use PHPUnit\Framework\TestCase;
 
-class SoapClientTest extends \PHPUnit_Framework_TestCase
+class SoapClientTest extends TestCase
 {
     protected $url;
     protected $options;
@@ -12,7 +13,7 @@ class SoapClientTest extends \PHPUnit_Framework_TestCase
     protected $factory;
     protected $factoryClient;
 
-    public function setUp()
+    protected function setUp(): void
     {
         $this->url = 'test-url';
         $this->options = array('option' => 'option_value');
@@ -23,7 +24,7 @@ class SoapClientTest extends \PHPUnit_Framework_TestCase
             ->getMock();
     }
 
-    public function tearDown()
+    protected function tearDown(): void
     {
         $this->url = null;
         $this->options = null;
@@ -84,7 +85,7 @@ class SoapClientTest extends \PHPUnit_Framework_TestCase
             ->with($this->url, $this->options)
             ->will($this->throwException(new \SoapFault('fault_code', 'fault_string')));
 
-        $this->setExpectedException('Exfoliate\Exception\ConnectionException');
+        $this->expectException('Exfoliate\Exception\ConnectionException');
 
         $this->client->call('method', array());
     }
@@ -100,7 +101,7 @@ class SoapClientTest extends \PHPUnit_Framework_TestCase
             ->method('__soapCall')
             ->will($this->throwException(new \SoapFault('fault_code', 'fault_string')));
 
-        $this->setExpectedException('Exfoliate\Exception\ClientException', 'Call to method failed');
+        $this->expectException('Exfoliate\Exception\ClientException', 'Call to method failed');
 
         $this->client->call('method', array());
     }
