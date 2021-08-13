@@ -10,6 +10,9 @@
             "name": "Jeremy Livingston"
         }
     ],
+    "config": {
+        "sort-packages": true
+    },
     "require": {
         "php": ">=7.1",
         "ext-soap": "*"
