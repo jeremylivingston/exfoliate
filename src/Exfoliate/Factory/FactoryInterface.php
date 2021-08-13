@@ -13,5 +13,5 @@ interface FactoryInterface
      *
      * @return mixed
      */
-    public function create($url, array $options = array());
+    public function create($url, array $options = []);
 }

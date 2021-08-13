@@ -25,8 +25,8 @@ After installing the Exfoliate library, simply create a new instance of the clie
 
 use Exfoliate\SoapClient;
 
-$client = new SoapClient('my-service-url', array('trace' => true));
-$response = $client->call('GetUser', array('user_id' => 1234));
+$client = new SoapClient('my-service-url', ['trace' => true]);
+$response = $client->call('GetUser', ['user_id' => 1234]);
 
 ```
 
@@ -37,13 +37,13 @@ Use the `Exfoliate\SoapClient::setHeaders()` method to set any SOAP headers when
 
 use Exfoliate\SoapClient;
 
-$client = new SoapClient('my-service-url', array('trace' => true));
+$client = new SoapClient('my-service-url', ['trace' => true]);
 
 $client->setHeaders(
-    new \SoapHeader('my-namespace', 'Auth', array('User' => 'me', 'Password' => 'pw'))
+    new \SoapHeader('my-namespace', 'Auth', ['User' => 'me', 'Password' => 'pw'])
 );
 
-$response = $client->call('GetUser', array('user_id' => 1234));
+$response = $client->call('GetUser', ['user_id' => 1234]);
 
 ```
 
@@ -55,8 +55,8 @@ You can retrieve the most recent request and response content via the `Exfoliate
 
 use Exfoliate\SoapClient;
 
-$client = new SoapClient('my-service-url', array('trace' => true));
-$response = $client->call('GetUser', array('user_id' => 1234));
+$client = new SoapClient('my-service-url', ['trace' => true]);
+$response = $client->call('GetUser', ['user_id' => 1234]);
 
 $lastRequest = $client->getLastRequest();
 $lastResponse = $client->getLastResponse();

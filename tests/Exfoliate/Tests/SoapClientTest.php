@@ -16,7 +16,7 @@ class SoapClientTest extends TestCase
     protected function setUp(): void
     {
         $this->url = 'test-url';
-        $this->options = array('option' => 'option_value');
+        $this->options = ['option' => 'option_value'];
         $this->factory = $this->getMockBuilder('Exfoliate\Factory\FactoryInterface')->getMock();
         $this->client = new SoapClient($this->url, $this->options, $this->factory);
         $this->factoryClient = $this->getMockBuilder('CoreProxies\Proxy\SoapClient')
@@ -45,7 +45,7 @@ class SoapClientTest extends TestCase
             ->with($this->url, $this->options)
             ->will($this->returnValue($this->factoryClient));
 
-        $this->client->call('method', array());
+        $this->client->call('method', []);
     }
 
     public function testClientIsCreatedOnce()
@@ -55,17 +55,17 @@ class SoapClientTest extends TestCase
             ->with($this->url, $this->options)
             ->will($this->returnValue($this->factoryClient));
 
-        $this->client->call('method', array());
-        $this->client->call('other_method', array());
+        $this->client->call('method', []);
+        $this->client->call('other_method', []);
     }
 
     public function testClientIsCalled()
     {
         $method = 'method';
-        $data = array('data_element' => 'element_value');
-        $options = array('soapaction' => 'some_action', 'uri' => 'some_uri');
+        $data = ['data_element' => 'element_value'];
+        $options = ['soapaction' => 'some_action', 'uri' => 'some_uri'];
         $inputHeaders = new \SoapHeader('http://soapinterop.org/echoheader/', 'echoMeStringRequest');
-        $outputHeaders = array('data_element' => 'element_value');
+        $outputHeaders = ['data_element' => 'element_value'];
 
         $this->factoryClient->expects($this->once())
             ->method('__soapCall')
@@ -87,7 +87,7 @@ class SoapClientTest extends TestCase
 
         $this->expectException('Exfoliate\Exception\ConnectionException');
 
-        $this->client->call('method', array());
+        $this->client->call('method', []);
     }
 
     public function testCallSoapFaultsThrowClientException()
@@ -103,7 +103,7 @@ class SoapClientTest extends TestCase
 
         $this->expectException('Exfoliate\Exception\ClientException', 'Call to method failed');
 
-        $this->client->call('method', array());
+        $this->client->call('method', []);
     }
 
     public function testUninitializedClientReturnsNullRequest()
@@ -125,7 +125,7 @@ class SoapClientTest extends TestCase
         $this->factoryClient->expects($this->once())
             ->method('__getLastRequest');
 
-        $this->client->call('method', array());
+        $this->client->call('method', []);
         $this->client->getLastRequest();
     }
 
@@ -138,13 +138,13 @@ class SoapClientTest extends TestCase
         $this->factoryClient->expects($this->once())
             ->method('__getLastResponse');
 
-        $this->client->call('method', array());
+        $this->client->call('method', []);
         $this->client->getLastResponse();
     }
 
     public function testHeadersAreSet()
     {
-        $headers = array('header_one' => 'one_value', 'header_two' => 'two_value');
+        $headers = ['header_one' => 'one_value', 'header_two' => 'two_value'];
 
         $this->factory->expects($this->once())
             ->method('create')
@@ -155,7 +155,7 @@ class SoapClientTest extends TestCase
             ->with($headers);
 
         $this->client->setHeaders($headers);
-        $this->client->call('method', array());
+        $this->client->call('method', []);
     }
 
     public function testEmptyHeadersAreNotSet()
@@ -167,6 +167,6 @@ class SoapClientTest extends TestCase
         $this->factoryClient->expects($this->never())
             ->method('__setSoapHeaders');
 
-        $this->client->call('method', array());
+        $this->client->call('method', []);
     }
 }

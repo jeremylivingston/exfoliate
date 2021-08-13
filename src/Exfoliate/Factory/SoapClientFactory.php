@@ -14,7 +14,7 @@ class SoapClientFactory implements FactoryInterface
      * @throws \Exfoliate\Exception\ConnectionException
      * @return mixed
      */
-    public function create($url, array $options = array())
+    public function create($url, array $options = [])
     {
         return new \SoapClient($url, $options);
     }

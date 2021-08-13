@@ -42,7 +42,7 @@ class SoapClient implements ClientInterface
      * @param array $options
      * @param Factory\FactoryInterface $factory
      */
-    public function __construct($url, array $options = array(), FactoryInterface $factory = null)
+    public function __construct($url, array $options = [], FactoryInterface $factory = null)
     {
         $this->url = $url;
         $this->options = $options;
@@ -59,7 +59,7 @@ class SoapClient implements ClientInterface
      * @throws Exception\ClientException
      * @return mixed
      */
-    public function call($method, $data, $options = array(), $inputHeaders = null, &$outputHeaders = null)
+    public function call($method, $data, array $options = [], $inputHeaders = null, array &$outputHeaders = null)
     {
         if (!$this->client) {
             $this->initializeClient();
