@@ -11,7 +11,8 @@
         }
     ],
     "require": {
-        "php": ">=5.4"
+        "php": ">=7.1",
+        "ext-soap": "*"
     },
     "require-dev": {
         "jeremylivingston/core-proxies": "dev-master",
