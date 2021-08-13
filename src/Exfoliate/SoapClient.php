@@ -23,7 +23,7 @@ class SoapClient implements ClientInterface
     protected $options;
 
     /**
-     * @var Factory\SoapClientFactory
+     * @var \Exfoliate\Factory\SoapClientFactory
      */
     protected $factory;
 
@@ -33,16 +33,16 @@ class SoapClient implements ClientInterface
     protected $client;
 
     /**
-     * @var mixed
+     * @var \SoapHeader|array|null
      */
     protected $headers;
 
     /**
      * @param string $url
      * @param array $options
-     * @param Factory\FactoryInterface $factory
+     * @param \Exfoliate\Factory\FactoryInterface|null $factory
      */
-    public function __construct($url, array $options = [], FactoryInterface $factory = null)
+    public function __construct(string $url, array $options = array(), FactoryInterface $factory = null)
     {
         $this->url = $url;
         $this->options = $options;
@@ -50,16 +50,9 @@ class SoapClient implements ClientInterface
     }
 
     /**
-     * @param string $method
-     * @param mixed $data
-     * @param array $options
-     * @param null $inputHeaders
-     * @param null $outputHeaders
-     *
-     * @throws Exception\ClientException
-     * @return mixed
+     * {@inheritDoc}
      */
-    public function call($method, $data, array $options = [], $inputHeaders = null, array &$outputHeaders = null)
+    public function call(string $method, $data, array $options = array(), $inputHeaders = null, array &$outputHeaders = null)
     {
         if (!$this->client) {
             $this->initializeClient();
@@ -73,23 +66,23 @@ class SoapClient implements ClientInterface
     }
 
     /**
-     * @return null|string
+     * {@inheritDoc}
      */
-    public function getLastRequest()
+    public function getLastRequest(): ?string
     {
         return $this->client ? $this->client->__getLastRequest() : null;
     }
 
     /**
-     * @return null|string
+     * {@inheritDoc}
      */
-    public function getLastResponse()
+    public function getLastResponse(): ?string
     {
         return $this->client ? $this->client->__getLastResponse() : null;
     }
 
     /**
-     * @param mixed $headers
+     * {@inheritDoc}
      */
     public function setHeaders($headers)
     {
@@ -97,7 +90,9 @@ class SoapClient implements ClientInterface
     }
 
     /**
-     * @throws Exception\ConnectionException
+     * Initialize a new client.
+     *
+     * @throws \Exfoliate\Exception\ConnectionException
      */
     protected function initializeClient()
     {

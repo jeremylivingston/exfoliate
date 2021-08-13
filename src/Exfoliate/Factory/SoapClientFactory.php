@@ -8,13 +8,9 @@ namespace Exfoliate\Factory;
 class SoapClientFactory implements FactoryInterface
 {
     /**
-     * @param string $url
-     * @param array $options
-     *
-     * @throws \Exfoliate\Exception\ConnectionException
-     * @return mixed
+     * {@inheritDoc}
      */
-    public function create($url, array $options = [])
+    public function create(string $url, array $options = []): \SoapClient
     {
         return new \SoapClient($url, $options);
     }
