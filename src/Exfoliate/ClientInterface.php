@@ -12,7 +12,7 @@ interface ClientInterface
      *
      * @param string $method
      *   The method name.
-     * @param mixed $data
+     * @param array $args
      *   Data to be passed to the client.
      * @param array $options
      *   Client options.
@@ -26,26 +26,26 @@ interface ClientInterface
      *
      * @see https://www.php.net/manual/soapclient.soapcall.php
      */
-    public function call(string $method, $data, array $options = array(), $inputHeaders = null, array &$outputHeaders = null);
+    public function call(string $method, array $args, array $options = array(), $inputHeaders = null, array &$outputHeaders = null);
 
     /**
      * Get last request made by client.
      *
      * @return string|null
      */
-    public function getLastRequest();
+    public function getLastRequest(): ?string;
 
     /**
      * Get last response.
      *
      * @return string|null
      */
-    public function getLastResponse();
+    public function getLastResponse(): ?string;
 
     /**
      * Set headers used for soap all SOAP requests.
      *
      * @param \SoapHeader|array|null $headers
      */
-    public function setHeaders($headers);
+    public function setHeaders($headers): void;
 }

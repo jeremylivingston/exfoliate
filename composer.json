@@ -19,7 +19,8 @@
     },
     "require-dev": {
         "jeremylivingston/core-proxies": "dev-master",
-        "phpunit/phpunit": ">=3.7"
+        "phpunit/phpunit": ">=3.7",
+        "vimeo/psalm": "^4.9"
     },
     "autoload": {
         "psr-0": { "Exfoliate": "src/" }

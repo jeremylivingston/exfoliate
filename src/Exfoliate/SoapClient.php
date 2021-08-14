@@ -23,12 +23,12 @@ class SoapClient implements ClientInterface
     protected $options;
 
     /**
-     * @var \Exfoliate\Factory\SoapClientFactory
+     * @var \Exfoliate\Factory\FactoryInterface
      */
     protected $factory;
 
     /**
-     * @var \SoapClient
+     * @var \SoapClient|null
      */
     protected $client;
 
@@ -52,14 +52,15 @@ class SoapClient implements ClientInterface
     /**
      * {@inheritDoc}
      */
-    public function call(string $method, $data, array $options = array(), $inputHeaders = null, array &$outputHeaders = null)
+    public function call(string $method, array $args, array $options = array(), $inputHeaders = null, array &$outputHeaders = null)
     {
         if (!$this->client) {
             $this->initializeClient();
         }
 
         try {
-            return $this->client->__soapCall($method, $data, $options, $inputHeaders, $outputHeaders);
+            /** @psalm-suppress PossiblyNullReference */
+            return $this->client->__soapCall($method, $args, $options, $inputHeaders, $outputHeaders);
         } catch (\SoapFault $soapFault) {
             throw new ClientException(sprintf('Call to %s failed', $method), 0, $soapFault);
         }
@@ -84,7 +85,7 @@ class SoapClient implements ClientInterface
     /**
      * {@inheritDoc}
      */
-    public function setHeaders($headers)
+    public function setHeaders($headers): void
     {
         $this->headers = $headers;
     }
@@ -94,7 +95,7 @@ class SoapClient implements ClientInterface
      *
      * @throws \Exfoliate\Exception\ConnectionException
      */
-    protected function initializeClient()
+    protected function initializeClient(): void
     {
         try {
             $this->client = $this->factory->create($this->url, $this->options);
