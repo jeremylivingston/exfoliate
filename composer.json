@@ -19,6 +19,7 @@
     },
     "require-dev": {
         "jeremylivingston/core-proxies": "dev-master",
+        "phpstan/phpstan": "^0.12.94",
         "phpunit/phpunit": ">=3.7",
         "vimeo/psalm": "^4.9"
     },

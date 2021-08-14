@@ -101,7 +101,7 @@ class SoapClientTest extends TestCase
             ->method('__soapCall')
             ->will($this->throwException(new \SoapFault('fault_code', 'fault_string')));
 
-        $this->expectException('Exfoliate\Exception\ClientException', 'Call to method failed');
+        $this->expectException('Exfoliate\Exception\ClientException');
 
         $this->client->call('method', []);
     }
